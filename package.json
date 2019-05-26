@@ -7,9 +7,8 @@
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
     "start": "cross-env NODE_ENV=production node dist/index.js",
-    "lint:components": "tslint -c tslint.json 'components/**/*.{ts,tsx}' --fix",
-    "lint:pages": "tslint -c tslint.json 'pages/**/*.{ts,tsx}' --fix",
-    "lint:server": "tslint -c tslint.json 'server/**/*.{ts,tsx}' --fix"
+    "lint:client": "tslint -c tslint.json '{components,layouts,pages,interfaces}/**/*.{ts,tsx}' --fix",
+    "lint:server": "tslint -c tslint.json '{server,interfaces}/**/*.{ts,tsx}' --fix"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",

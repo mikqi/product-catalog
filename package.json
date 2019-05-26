@@ -40,12 +40,8 @@
     "typescript": "^3.4.5"
   },
   "lint-staged": {
-    "components/**/*.{ts,tsx}": [
-      "yarn lint:components",
-      "git add"
-    ],
-    "pages/**/*.{ts,tsx}": [
-      "yarn lint:pages",
+    "{components,layouts,pages,interfaces}/**/*.{ts,tsx}": [
+      "yarn lint:client",
       "git add"
     ],
     "server/**/*.{ts,tsx}": [

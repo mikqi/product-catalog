@@ -1,33 +1,25 @@
-import Head from 'next/head'
-import Link from 'next/link'
+import { Icon, NavBar, WingBlank } from 'antd-mobile'
+import { withRouter } from 'next/router'
+
+import Head from '../components/head'
 
 import { IProps } from '../interfaces/react'
 
-export default ({ children, title = 'This is the default title' }: IProps) => (
-  <div>
-    <Head>
-      <title>{title}</title>
-      <meta charSet='utf-8' />
-      <meta name='viewport' content='initial-scale=1.0, width=device-width' />
-    </Head>
-    <header>
-      <nav>
-        <Link href='/'>
-          <a>Home</a>
-        </Link>{' '}
-        |
-        <Link href='/about'>
-          <a>About</a>
-        </Link>{' '}
-        |
-        <Link href='/contact'>
-          <a>Contact</a>
-        </Link>
-      </nav>
-    </header>
-
-    {children}
-
-    <footer>{'I`m here to stay'}</footer>
-  </div>
+export default withRouter(
+  ({ router = {}, children, title = 'This is the default title' }: IProps) => (
+    <div>
+      <Head title={title} />
+      <NavBar
+        style={{
+          padding: '0 30%'
+        }}
+        mode='light'
+        icon={<Icon type='left' />}
+        onLeftClick={() => router.back()}
+      >
+        {title}
+      </NavBar>
+      <WingBlank style={{ padding: '0 30%' }}>{children}</WingBlank>
+    </div>
+  )
 )

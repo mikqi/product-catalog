@@ -6,7 +6,10 @@
   "scripts": {
     "dev": "nodemon",
     "build": "next build && tsc --project tsconfig.server.json",
-    "start": "cross-env NODE_ENV=production node dist/index.js"
+    "start": "cross-env NODE_ENV=production node dist/index.js",
+    "lint:components": "tslint -c tslint.json 'components/**/*.{ts,tsx}' --fix",
+    "lint:pages": "tslint -c tslint.json 'pages/**/*.{ts,tsx}' --fix",
+    "lint:server": "tslint -c tslint.json 'server/**/*.{ts,tsx}' --fix"
   },
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
@@ -36,5 +39,24 @@
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
     "typescript": "^3.4.5"
+  },
+  "lint-staged": {
+    "components/**/*.{ts,tsx}": [
+      "yarn lint:components",
+      "git add"
+    ],
+    "pages/**/*.{ts,tsx}": [
+      "yarn lint:pages",
+      "git add"
+    ],
+    "server/**/*.{ts,tsx}": [
+      "yarn lint:server",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "cross-env NODE_ENV=development lint-staged"
+    }
   }
 }

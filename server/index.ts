@@ -21,6 +21,7 @@ app.prepare().then(() => {
   })
 
   server.listen(port, () => {
+    // tslint:disable-next-line:no-console
     console.log(`> Ready on http://localhost:${port}`)
   })
 })

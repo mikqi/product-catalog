@@ -1,5 +1,5 @@
-import React from 'react'
 import { Button } from 'antd-mobile'
+import React from 'react'
 
 const Home = () => (
   <div>

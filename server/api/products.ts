@@ -4,8 +4,8 @@ import querystring from 'querystring'
 const router = Router()
 
 const URL_SEARCH = 'https://www.blibli.com/backend/search/products?'
-const URL_PRODUCT = (productId: string, query: string) =>
-  `https://www.blibli.com/backend/product/products/${productId}/_summary?${query}`
+const URL_PRODUCT = (productId: string, query: string, type = '_summary') =>
+  `https://www.blibli.com/backend/product/products/${productId}/${type}?${query}`
 
 router.get(
   '/products',
@@ -20,14 +20,21 @@ router.get(
 
 router.get(
   '/products/:formattedId',
-  (req: Request, res: Response): void => {
+  async (req: Request, res: Response): Promise<void> => {
     const query = querystring.stringify(req.query)
     const formattedId = req.params.formattedId
+    const { data } = await axios.get(URL_PRODUCT(formattedId, query))
+    res.json(data)
+  }
+)
 
-    axios.get(URL_PRODUCT(formattedId, query)).then(response => {
-      const { data } = response
-      res.json(data)
-    })
+router.get(
+  '/products/:formattedId/info',
+  async (req: Request, res: Response): Promise<void> => {
+    const query = querystring.stringify(req.query)
+    const formattedId = req.params.formattedId
+    const { data } = await axios.get(URL_PRODUCT(formattedId, query, '_info'))
+    res.json(data)
   }
 )
 

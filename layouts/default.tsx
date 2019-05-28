@@ -5,7 +5,7 @@ import Head from '../components/head'
 
 import { IProps } from '../interfaces/react'
 
-export default withRouter(
+const Layout = withRouter(
   ({ router = {}, children, title = 'This is the default title' }: IProps) => (
     <div style={{ fontFamily: 'Halvetica, Segoe UI, Roboto, Arial' }}>
       <Head title={title} />
@@ -23,3 +23,7 @@ export default withRouter(
     </div>
   )
 )
+
+Layout.displayName = 'Layout'
+
+export default Layout

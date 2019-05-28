@@ -4,6 +4,7 @@ import Link from 'next/link'
 import queryString from 'querystring'
 import React from 'react'
 
+import Preloader from '../components/Preloader'
 import ProductCard from '../components/ProductCard'
 import { IProduct } from '../interfaces/product'
 import Layout from '../layouts/default'
@@ -25,6 +26,7 @@ interface IProductState {
     start: number
   }
   products: any
+  isFetching: boolean
 }
 
 const ITEM_PER_PAGE = 24
@@ -33,6 +35,7 @@ class Home extends React.Component<{}, IProductState> {
   constructor(props: Readonly<{}>) {
     super(props)
     this.state = {
+      isFetching: false,
       payload: {
         by: 'pop',
         category: 'MU-1000007',
@@ -58,6 +61,9 @@ class Home extends React.Component<{}, IProductState> {
   }
 
   public fetchProducts = async () => {
+    this.setState({
+      isFetching: true
+    })
     try {
       const { data } = await axios.get(
         URL + queryString.stringify(this.state.payload)
@@ -71,6 +77,7 @@ class Home extends React.Component<{}, IProductState> {
       // tslint:disable-next-line:no-console
       console.log(error)
     } finally {
+      this.setState({ isFetching: false })
       document.addEventListener('scroll', this.trackScrolling)
     }
   }
@@ -105,31 +112,51 @@ class Home extends React.Component<{}, IProductState> {
   }
 
   public render() {
-    const { products } = this.state
+    const { products, isFetching } = this.state
+
     return (
       <Layout title='Title'>
+        {isFetching && products.length === 0 ? (
+          <div>
+            <LoadingCard />
+            <LoadingCard />
+            <LoadingCard />
+          </div>
+        ) : (
+          <div id='product-container'>
+            {products
+              ? products.map((product: IProduct) => {
+                  return (
+                    <Link
+                      key={product.id}
+                      href={{ pathname: '/products', query: { ...product } }}
+                      as={`/products/${product.formattedId}?selectedItemSku=${
+                        product.defaultSku
+                      }`}
+                    >
+                      <div>
+                        <ProductCard {...product} />
+                        <WhiteSpace size='lg' />
+                      </div>
+                    </Link>
+                  )
+                })
+              : ''}
+          </div>
+        )}
         <WhiteSpace size='lg' />
-        <div id='product-container'>
-          {products
-            ? products.map((product: IProduct) => {
-                return (
-                  <Link
-                    key={product.id}
-                    href={{ pathname: '/products', query: { id: product.id, name: product.name } }}
-                    as={`/products/${product.id}`}
-                  >
-                    <div>
-                      <ProductCard {...product} />
-                      <WhiteSpace size='lg' />
-                    </div>
-                  </Link>
-                )
-              })
-            : ''}
-        </div>
       </Layout>
     )
   }
 }
+
+const LoadingCard = () => (
+  <div>
+    <Preloader loadingStyle={{ height: '300px' }} />
+    <Preloader wrapperStyle={{ marginTop: 12 }} />
+    <Preloader wrapperStyle={{ marginTop: 12 }} />
+    <Preloader wrapperStyle={{ marginTop: 12 }} />
+  </div>
+)
 
 export default Home

@@ -1,0 +1,19 @@
+.u-loading-gradient {
+  animation: background-move 1.5s infinite;
+  background-image: linear-gradient(to right, #fafafa, #eee, #fafafa);
+  background-size: 200%;
+}
+
+@keyframes background-move {
+  0% {
+    background-position: 100%;
+  }
+
+  100% {
+    background-position: -100%;
+  }
+}
+
+.u-invisible {
+  visibility: hidden !important;
+}

@@ -21,7 +21,9 @@
     "next": "^8.1.0",
     "querystring": "^0.2.0",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-slick": "^0.24.0",
+    "slick-carousel": "^1.8.1"
   },
   "devDependencies": {
     "@types/express": "^4.16.1",
@@ -30,8 +32,10 @@
     "@types/next": "^8.0.5",
     "@types/react": "^16.8.17",
     "@types/react-dom": "16.8.4",
+    "@types/react-slick": "^0.23.4",
     "@zeit/next-typescript": "^1.1.1",
     "cross-env": "^5.2.0",
+    "file-loader": "^3.0.1",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
     "nodemon": "^1.19.1",
@@ -39,7 +43,8 @@
     "tslint": "^5.16.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-react": "^4.0.0",
-    "typescript": "^3.4.5"
+    "typescript": "^3.4.5",
+    "url-loader": "^1.1.2"
   },
   "lint-staged": {
     "{components,layouts,pages,interfaces}/**/*.{ts,tsx}": [

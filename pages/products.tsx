@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import ProductDetailCarousel from '../components/ProductDetailCarousel'
 import { IProductDetail } from '../interfaces/product'
 import Layout from '../layouts/default'
 
@@ -33,11 +34,7 @@ export default class extends Component<any, any> {
     const product: IProductDetail = this.props.product
     return (
       <Layout title={product.name}>
-        <div>
-          {product.images.map((image, i) => {
-            return <img key={i} src={image.full} style={{ width: '100%' }} />
-          })}
-        </div>
+        <ProductDetailCarousel images={product.images} />
         <h2>{product.name}</h2>
         <div>
           <div dangerouslySetInnerHTML={{ __html: product.description }} />

@@ -22,8 +22,10 @@ app.prepare().then(() => {
     return app.render(req, res, '/', req.query)
   })
 
-  server.get('/products/:id', (req, res) => {
-    return app.render(req, res, '/products', { id: req.params.id })
+  server.get('/products/:formattedId', (req, res) => {
+    return app.render(req, res, '/products', {
+      formattedId: req.params.formattedId
+    })
   })
 
   server.get('*', (req, res) => {

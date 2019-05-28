@@ -18,6 +18,14 @@ app.prepare().then(() => {
     return app.render(req, res, '/', req.query)
   })
 
+  server.get('/products', (req, res) => {
+    return app.render(req, res, '/', req.query)
+  })
+
+  server.get('/products/:id', (req, res) => {
+    return app.render(req, res, '/products', { id: req.params.id })
+  })
+
   server.get('*', (req, res) => {
     return handle(req, res)
   })

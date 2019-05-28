@@ -1,7 +1,9 @@
 import { WhiteSpace } from 'antd-mobile'
 import axios from 'axios'
+import Link from 'next/link'
 import queryString from 'querystring'
 import React from 'react'
+
 import ProductCard from '../components/ProductCard'
 import { IProduct } from '../interfaces/product'
 import Layout from '../layouts/default'
@@ -111,10 +113,16 @@ class Home extends React.Component<{}, IProductState> {
           {products
             ? products.map((product: IProduct) => {
                 return (
-                  <div key={product.id}>
-                    <ProductCard {...product} />
-                    <WhiteSpace size='lg' />
-                  </div>
+                  <Link
+                    key={product.id}
+                    href={{ pathname: '/products', query: { id: product.id, name: product.name } }}
+                    as={`/products/${product.id}`}
+                  >
+                    <div>
+                      <ProductCard {...product} />
+                      <WhiteSpace size='lg' />
+                    </div>
+                  </Link>
                 )
               })
             : ''}

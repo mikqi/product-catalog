@@ -84,7 +84,7 @@ class Home extends React.Component<{}, IProductState> {
 
   public isBottom(el: HTMLElement | null): boolean {
     if (el instanceof HTMLElement) {
-      return el.getBoundingClientRect().bottom <= window.innerHeight
+      return el.getBoundingClientRect().bottom <= window.innerHeight + 300
     }
 
     return false

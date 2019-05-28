@@ -1,5 +1,6 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import OverlayImage from '../components/OverlayImage'
 import ProductDetailCarousel from '../components/ProductDetailCarousel'
 import { IProductDetail } from '../interfaces/product'
 import Layout from '../layouts/default'
@@ -30,11 +31,39 @@ export default class extends Component<any, any> {
     }
   }
 
+  public state = {
+    imageUrl: '',
+    isViewImage: false
+  }
+
+  public handleClick = (imageUrl: string) => {
+    this.setState({
+      imageUrl,
+      isViewImage: true
+    })
+  }
+
+  public handleClose = () => {
+    this.setState({
+      isViewImage: false
+    })
+  }
+
   public render() {
     const product: IProductDetail = this.props.product
     return (
       <Layout title={product.name}>
-        <ProductDetailCarousel images={product.images} />
+        <ProductDetailCarousel
+          images={product.images}
+          onClick={this.handleClick}
+        />
+
+        <OverlayImage
+          show={this.state.isViewImage}
+          imageUrl={this.state.imageUrl}
+          handleClose={this.handleClose}
+        />
+
         <h2>{product.name}</h2>
         <div>
           <div dangerouslySetInnerHTML={{ __html: product.description }} />

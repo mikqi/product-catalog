@@ -34,7 +34,11 @@ const ProductDetailCarousel = props => {
     <div>
       <Slider {...settings}>
         {images.map((image, i) => (
-          <img src={image.full} key={i} />
+          <img
+            src={image.full}
+            key={i}
+            onClick={() => props.onClick(image.full)}
+          />
         ))}
       </Slider>
     </div>

@@ -12,6 +12,8 @@ app.prepare().then(() => {
 
   server.use(logger('dev'))
 
+  server.use('/api', require('./api'))
+
   server.get('/', (req, res) => {
     return app.render(req, res, '/', req.query)
   })

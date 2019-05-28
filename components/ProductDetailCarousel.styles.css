@@ -8,6 +8,22 @@
   width: 60px;
   height: 60px;
   border: 1px solid #333;
+  opacity: 0.7;
+  transition: 0.3 ease;
+}
+
+div.slick-active {
+  cursor: pointer;
+}
+
+li.slick-active {
+  transition: 0.3 ease;
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.slick-slide img {
+  width: 101% !important;
 }
 
 .slick-prev:before,

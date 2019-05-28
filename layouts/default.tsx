@@ -7,7 +7,7 @@ import { IProps } from '../interfaces/react'
 
 export default withRouter(
   ({ router = {}, children, title = 'This is the default title' }: IProps) => (
-    <div>
+    <div style={{ fontFamily: 'Halvetica, Segoe UI, Roboto, Arial' }}>
       <Head title={title} />
       <NavBar
         style={{

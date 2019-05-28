@@ -116,35 +116,36 @@ class Home extends React.Component<{}, IProductState> {
 
     return (
       <Layout title='Title'>
-        {isFetching && products.length === 0 ? (
+        <div id='product-container'>
+          {products
+            ? products.map((product: IProduct) => {
+                return (
+                  <Link
+                    key={product.id}
+                    href={{ pathname: '/products', query: { ...product } }}
+                    as={`/products/${product.formattedId}?selectedItemSku=${
+                      product.defaultSku
+                    }`}
+                  >
+                    <div>
+                      <ProductCard {...product} />
+                      <WhiteSpace size='lg' />
+                    </div>
+                  </Link>
+                )
+              })
+            : ''}
+        </div>
+        <WhiteSpace size='lg' />
+        {isFetching ? (
           <div>
             <LoadingCard />
             <LoadingCard />
             <LoadingCard />
           </div>
         ) : (
-          <div id='product-container'>
-            {products
-              ? products.map((product: IProduct) => {
-                  return (
-                    <Link
-                      key={product.id}
-                      href={{ pathname: '/products', query: { ...product } }}
-                      as={`/products/${product.formattedId}?selectedItemSku=${
-                        product.defaultSku
-                      }`}
-                    >
-                      <div>
-                        <ProductCard {...product} />
-                        <WhiteSpace size='lg' />
-                      </div>
-                    </Link>
-                  )
-                })
-              : ''}
-          </div>
+          ''
         )}
-        <WhiteSpace size='lg' />
       </Layout>
     )
   }

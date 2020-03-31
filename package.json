@@ -13,7 +13,7 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "antd-mobile": "^2.2.13",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "babel-plugin-import": "^1.11.2",
     "express": "^4.17.1",
     "faker": "^4.1.0",
